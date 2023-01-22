@@ -1,0 +1,145 @@
+{
+    "name": "cifar10_resnet",
+    "base": "../resnet.json",
+    "data_factory": {
+        "train": {
+            "names": "cifar10_image_train",
+            "batch_size": 256,
+            "num_workers": 4,
+            "transforms": [
+                {
+                    "name": "RandomCrop",
+                    "args": {
+                        "size": 32,
+                        "padding": 4
+                    }
+                },
+                {
+                    "name": "RandomHorizontalFlip",
+                    "args": {
+                        "p": 0.5
+                    }
+                },
+                {
+                    "name": "ToTensor",
+                    "args": {}
+                },
+                {
+                    "name": "Normalize",
+                    "args": {
+                        "mean": [0.4914, 0.4822, 0.4465],
+                        "std": [0.2023, 0.1994, 0.2010]
+                    }
+                }
+            ],
+            "sampler": "TrainingSampler"
+        },
+        "valid": {
+            "names": "cifar10_image_test",
+            "batch_size": 4,
+            "num_workers": 0,
+            "sampler": null,
+            "transforms": [
+                {
+                    "name": "Resize",
+                    "args": {
+                        "size": 32
+                    }
+                },
+                {
+                    "name": "ToTensor",
+                    "args": {}
+                },
+                {
+                    "name": "Normalize",
+                    "args": {
+                        "mean": [0.4914, 0.4822, 0.4465],
+                        "std": [0.2023, 0.1994, 0.2010]
+                    }
+                }
+            ]
+        },
+        "test": {
+            "names": "cifar10_image_test",
+            "batch_size": 1,
+            "num_workers": 0,
+            "sampler": null,
+            "transforms": [
+                {
+                    "name": "Resize",
+                    "args": {
+                        "size": 32
+                    }
+                },
+                {
+                    "name": "ToTensor",
+                    "args": {}
+                },
+                {
+                    "name": "Normalize",
+                    "args": {
+                        "mean": [0.4914, 0.4822, 0.4465],
+                        "std": [0.2023, 0.1994, 0.2010]
+                    }
+                }
+            ]
+        }
+    },
+
+    "model": {
+        "name": "ResNet",
+        "args": {
+            "resnet": {
+                "name": "resnet18",
+                "args": {
+                    "pretrained": true
+                }
+            },
+            "num_classes": 10
+        }
+    },
+
+    "trainer": {
+        "epochs": 100,
+        "iters_per_epoch": -1,
+        "saved_period": 500,
+        "eval_period": 100,
+        "log_period": 50,
+        "save_last": 3,
+        "save_dir": "../../event_logs",
+        "ema_rate": null,
+        "monitor": "min total_loss",
+        "max_eval_iters": 50,
+        "tensorboard": true,
+        "resume_checkpoint": "",
+        "use_grad_clip": false
+   },
+
+   "solver": {
+        "optimizer": {
+            "name": "Adam",
+            "args": {
+                "lr": 3e-4
+            }
+        },
+        "lr_scheduler": null
+   },
+
+   "test": {
+        "resume_checkpoint": "",
+        "metrics": []
+   },
+
+   "infer": {
+        "data": {
+            "img_dir": "",
+            "batch_size": 1,
+            "num_workers": 0,
+            "transforms": null
+        },
+        
+        "resume_checkpoint": "",
+        "save_dir": "",
+        "save_pair": false
+   }
+}

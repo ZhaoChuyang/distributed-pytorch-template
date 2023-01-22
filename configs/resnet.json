@@ -1,0 +1,12 @@
+{
+    "model": {
+        "name": "",
+        "args": {
+            "resnet": {
+                "name": "resnet18",
+                "args": {
+                }
+            }
+        }
+    }
+}

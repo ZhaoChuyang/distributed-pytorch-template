@@ -1,0 +1,75 @@
+{
+    "name": "base_isp_exp",
+    "base": "",
+    "data_factory": {
+        "type": "image",
+        "train": {
+            "names": "",
+            "batch_size": 16,
+            "num_workers": 0,
+            "transforms": null,
+            "sampler": "TrainingSampler"
+        },
+        "valid": {
+            "names": "",
+            "batch_size": 4,
+            "num_workers": 0,
+            "transforms": null
+        },
+        "test": {
+            "names": "",
+            "batch_size": 1,
+            "num_workers": 0,
+            "transforms": null
+        }
+    },
+
+    "model": {
+        "name": "",
+        "args": {}
+    },
+
+    "trainer": {
+        "epochs": 100,
+        "iters_per_epoch": -1,
+        "saved_period": 500,
+        "eval_period": 100,
+        "log_period": 50,
+        "save_last": -1,
+        "save_dir": "../../event_logs",
+        "ema_rate": null,
+        "monitor": "min total_loss",
+        "max_eval_iters": -1,
+        "tensorboard": true,
+        "resume_checkpoint": "",
+        "use_grad_clip": false
+   },
+
+   "solver": {
+        "optimizer": {
+            "name": "Adam",
+            "args": {
+                "lr": 3e-3
+            }
+        },
+        "lr_scheduler": null
+   },
+
+   "test": {
+        "resume_checkpoint": "",
+        "metrics": []
+   },
+
+   "infer": {
+        "data": {
+            "img_dir": "",
+            "batch_size": 1,
+            "num_workers": 0,
+            "transforms": null
+        },
+        
+        "resume_checkpoint": "",
+        "save_dir": "",
+        "save_pair": false
+   }
+}
