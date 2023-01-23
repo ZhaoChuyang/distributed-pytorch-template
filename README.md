@@ -17,7 +17,7 @@ Setup your datasets as introduced in [datasets/README.md](./datasets/README.md).
 export ALL_DATASETS=/path/to/datasets_root
 ```
 
-### Build DeepLLE from source
+### Build from source
 
 In the root directory of the project, installing by:
 ```

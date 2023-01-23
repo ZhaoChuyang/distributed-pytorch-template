@@ -430,6 +430,10 @@ class SimpleTrainer(BaseTrainer):
                 total_time, total_time / total
                 )
             )
+        
+        for key, value in self.valid_metrics.items():
+            self.logger.info('{:15s}: {:.3f}'.format(str(key), value))
+        
 
     @classmethod
     def build_evaluator(cls, cfg, dataset_name):

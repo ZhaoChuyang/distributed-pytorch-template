@@ -4,7 +4,8 @@ import os
 import sys
 import json
 import argparse
-# NOTE: rename `src` to your package name if you renamed the package
+# NOTE: change `src.` to the root module name of your project
+from src import PROJECT_NAME
 from src.engine.launch import launch
 from src.engine.trainer import SimpleTrainer
 from src.utils.logger import setup_logger
@@ -119,9 +120,8 @@ def default_setup(config):
     mkdirs(config["trainer"]["log_dir"])
 
     rank = comm.get_rank()
-    # change this to the name of your project name
-    project_name = "src"
-    logger = setup_logger(config["trainer"]["log_dir"], rank, name=project_name)
+
+    logger = setup_logger(config["trainer"]["log_dir"], rank, name=PROJECT_NAME)
 
     logger.info("Configuration:")
     logger.info(json.dumps(config, indent=4))
